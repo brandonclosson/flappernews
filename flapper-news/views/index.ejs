@@ -44,7 +44,7 @@
           posted by <a>{{post.author}}</a> |
         </span>
         <span>
-          <a href="/#/posts/{{post._id}}">Comments</a>
+          <a href="/#/posts/{{post._id}}">{{ post.comments.length }} Comments</a>
         </span>
       </div>
 
@@ -91,7 +91,8 @@
     	</span>
   	</div>
   	<form ng-submit="addComment()"
-    style="margin-top:30px;">
+    style="margin-top:30px;"
+    ng-show="isLoggedIn()">
 	    <h3>Add a new comment</h3>
 
 	    <div class="form-group">
@@ -102,10 +103,13 @@
 	    </div>
 	    <button type="submit" class="btn btn-primary">Post</button>
 	  </form>
+    <div ng-hide="isLoggedIn()">
+      <h3>You need to <a href="/#/login">login</a> or <a href="/#/register">register</a> to make a post.</h3>
+    </div>
 </script>
 <script type="text/ng-template" id="/register.html">
   <div class="page-header">
-    <a href="/"><h1>Flapper News</h1></a>
+    <a href="/#/home"><h1>Flapper News</h1></a>
   </div>
   <div ng-show="error" class="alert alert-danger row">
     <span>{{ error.message }}</span>
@@ -132,7 +136,7 @@
 </script>
 <script type="text/ng-template" id="/login.html">
   <div class="page-header">
-    <a href="/"><h1>Flapper News</h1></a>
+    <a href="/#/home"><h1>Flapper News</h1></a>
   </div>
 
   <div ng-show="error" class="alert alert-danger row">
