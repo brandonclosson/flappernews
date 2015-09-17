@@ -102,7 +102,7 @@ function($stateProvider, $urlRouterProvider) {
 
 	return auth;
 }])
-.factory('posts', ['$http', function($http){
+.factory('posts', ['$http', 'auth', function($http, auth){
 	var o = {
 		posts: [],
 	};
@@ -154,9 +154,9 @@ function($stateProvider, $urlRouterProvider) {
 .controller('MainCtrl', [
 '$scope',
 'posts',
-function($scope, posts) {
-	$scope.test = 'Hello world!';
-
+'auth',
+function($scope, posts, auth) {
+	$scope.isLoggedIn = auth.isLoggedIn;
 	$scope.posts = posts.posts;
 
 	$scope.addPost = function() {
@@ -177,8 +177,10 @@ function($scope, posts) {
 '$stateParams',
 'posts',
 'post',
-function($scope, $stateParams, posts, post) {
+'auth',
+function($scope, $stateParams, posts, post, auth) {
 	$scope.post = post;
+	$scope.isLoggedIn = auth.isLoggedIn;
 
 	$scope.addComment = function() {
 		if ($scope.body === '' || $scope.body === undefined) { return; }
