@@ -30,7 +30,6 @@ function($stateProvider, $urlRouterProvider) {
 
 	$urlRouterProvider.otherwise('home');
 }])
-
 .factory('auth', ['$http', '$window', function($http, $window) {
 	var auth = {};
 
@@ -166,4 +165,32 @@ function($scope, $stateParams, posts, post) {
 	$scope.incrementUpvotes = function(comment) {
 		posts.upvoteComment(post, comment);
 	}
+}])
+.controller('AuthCtrl', [
+'$scope',
+'$state',
+'auth',
+function($scope, $state, auth) {
+	$scope.user = {};
+
+	$scope.register = function() {
+		auth.register($scope.user).error(function(error){
+			$scope.error = error;
+		}).then(function(){
+			$state.go('home');
+		});
+	};
+
+	$scope.logIn = function() {
+		auth.logIn($scope.user).error(function(error){
+			$scope.error = error;
+		}).then(function(){
+			$state.go('home');
+		});
+	};
 }]);
+
+
+
+
+
