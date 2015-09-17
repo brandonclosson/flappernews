@@ -27,16 +27,18 @@ function($stateProvider, $urlRouterProvider) {
 				}]
 			}
 		})
+
 		.state('login', {
 			url: '/login',
 			templateUrl: '/login.html',
 			controller: 'AuthCtrl',
 			onEnter: ['$state', 'auth', function($state, auth){
 				if(auth.isLoggedIn()){
-					$state.go('home')
+					$state.go('home');
 				}
 			}]
 		})
+
 		.state('register', {
 			url: '/register',
 			templateUrl: '/register.html',
@@ -202,7 +204,7 @@ function($scope, $state, auth) {
 	};
 
 	$scope.logIn = function() {
-		auth.logIn($scope.user).error(function(error){
+		auth.login($scope.user).error(function(error){
 			$scope.error = error;
 		}).then(function(){
 			$state.go('home');

@@ -1,7 +1,8 @@
 var express = require('express');
-var jwt = require('express-jwt');
 var router = express.Router();
+var jwt = require('express-jwt');
 var auth = jwt({secret: 'SECRET_KEY', userProperty: 'payload'});
+var passport = require('passport');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
