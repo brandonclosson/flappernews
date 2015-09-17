@@ -49,7 +49,8 @@
       </div>
 
       <form ng-submit="addPost()"
-        style="margin-top:30px;">
+        style="margin-top:30px;"
+        ng-show="isLoggedIn()">
         <h3>Add a new post</h3>
 
         <div class="form-group">
@@ -66,6 +67,9 @@
         </div>
         <button type="submit" class="btn btn-primary">Post</button>
       </form>
+      <div ng-hide="isLoggedIn()">
+        <h3>You need to <a href="/#/login">login</a> or <a href="/#/register">register</a> to make a post.</h3>
+      </div>
   </script>
 <script type="text/ng-template" id="/posts.html">
   	<div class="page-header">
@@ -101,7 +105,7 @@
 </script>
 <script type="text/ng-template" id="/register.html">
   <div class="page-header">
-    <h1>Flapper News</h1>
+    <a href="/"><h1>Flapper News</h1></a>
   </div>
   <div ng-show="error" class="alert alert-danger row">
     <span>{{ error.message }}</span>
@@ -128,7 +132,7 @@
 </script>
 <script type="text/ng-template" id="/login.html">
   <div class="page-header">
-    <h1>Flapper News</h1>
+    <a href="/"><h1>Flapper News</h1></a>
   </div>
 
   <div ng-show="error" class="alert alert-danger row">
